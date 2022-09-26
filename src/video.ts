@@ -29,7 +29,7 @@ export class Video {
         // document.querySelector()
     }
 
-    append(element: unknown) {
+    append(element: Shape | Text) {    // can add more element types
         // append the specified element to the video
         this.groups.push(element);
         return this;
