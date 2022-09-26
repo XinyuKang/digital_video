@@ -4,12 +4,8 @@ export class dv {
     video: Video;
    
     constructor(url: string) {
-      this.video = url
+      this.video = new Video(url);
     }
-   
-    // greet() {
-    //   return "Hello, " + this.greeting;
-    // }
   }
    
-  let greeter = new dv("/.../path/to/video");
+  let dvElement = new dv("/.../path/to/video");
