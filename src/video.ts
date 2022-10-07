@@ -1,5 +1,16 @@
 import {Shape} from "./shape.js";
 
+
+
+interface Node {
+    attr: any
+    children: Node[]
+}
+
+interface Tree {
+    root: Node
+}
+
 export class Video {
     // this class loads the video
     url: string;
@@ -8,7 +19,8 @@ export class Video {
     // type A: [];
     // type B: [];
     groups: Array<Shape>;
-
+    frames: Tree[]= []
+    
     constructor(url: string) {
         this.url = url;
         this.load();
