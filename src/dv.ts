@@ -1,4 +1,4 @@
-import {Video} from "./video.js";
+import {Video} from "./video";
 
 export class dv {
     video: Video;
