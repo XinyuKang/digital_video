@@ -1,4 +1,11 @@
 
+import {TNode} from "./player";
+interface CircleInterface extends TNode {
+    cx: number
+    cy: number
+    r: number
+}
+
 export class Shape {
     // this class implements all kinds of shapes that might be added to the video
     // circle, rect, square etc.
@@ -15,15 +22,16 @@ export class Shape {
     }
 }
 
-export class Circle {
-    cx: number;
-    cy: number;
-    r: number;
+export class Circle implements CircleInterface {
+    
+    name = "circle";
+    cx = 0;
+    cy = 0;
+    r = 1;
+    children = null;
 
     constructor() {
-        this.cx = 0;
-        this.cy = 0;
-        this.r = 1;
+        
     }
 
     setAttr(attr: string, style: string) {
