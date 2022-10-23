@@ -1,13 +1,29 @@
 import {Player, TNode} from "./player";
+import {frameObj} from "./video";
 
 export class Frame{
     players: Array<Player>;
+    input: frameObj;
 
-    constructor() {
-        this.players = new Array<Player>(); // TODO: should load all players inside the frame
+    constructor(input: frameObj) {
+        this.input = input;
+        this.players = new Array<Player>();
+        this.addPlayers();
     }
      
   
+    addPlayers() {
+        // TODO: should load all players inside the frame
+        for ( let p of this.input.players) {
+            // check duplicate id
+            if (!idCollection.has(p.id)) {
+                this.players.push(new Player(p));
+            }
+            else throw new Error("Input contains players of duplicate IDs")
+            
+        }
+    }
+
     selectAll(type: string):  Array<TNode> {
         if (type=="player") return this.players;
         else {

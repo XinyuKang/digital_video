@@ -1,6 +1,7 @@
 import {v4 as uuidv4} from 'uuid';
 import { Circle, Rect } from './shape';
 import { Text } from './text';
+import { playerObj } from "./video";
 
 
 // export interface TNode {
@@ -21,22 +22,27 @@ export class TNode {
     constructor(id?: string){
         this.name = null;
         this.children = null;
-        if (!id) this.id = uuidv4();
-        else this.id = id;
+        if (id && idCollection.has(id)) throw new Error("ID " + id + " already exists")
+        else if (!id) id = uuidv4();
+        this.id = id;
     }
 
     attr(attr: string, val: string) {
-        if (attr==="id") this.id = val;
+        if (attr==="id") {
+            // check if id already exists
+            if (idCollection.has(val)) throw new Error("ID " + val + " already exists")
+            else this.id = val;
+        }
     }
 
     append(name: string) {
-        // player object cannot add "player" itself
+        //  cannot add "player" type itself
         if (name == "player") throw new Error("Cannot append 'player' to ")
         let child: TNode;
         if (name=="circle") child = new Circle()
         else if (name=="rect") child = new Rect()
         else if (name=="text") child = new Text()
-        else throw new Error("Can't append and object of type " + name)
+        else throw new Error("Object of type " + name + " is  not defined")
         if (!this.children) {
             this.children = new Array<TNode>();
         }
@@ -78,10 +84,12 @@ export class TNode {
 
 export class Player extends TNode{
     // player: Tree;
+    player: playerObj;
 
-    constructor(id?: string){
+    constructor(player: playerObj, id?: string){
         super(id)
-        this.name = "player"
+        this.name = "player";
+        this.player = player;
     }
 
     selectAll(type: string): Array<TNode> {
