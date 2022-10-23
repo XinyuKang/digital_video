@@ -30,9 +30,10 @@ export class Video {
 
     select(id: string) {
         for (let f of this.frames) {
-            
+            let subret = f.select(id)
+            if (subret) return subret
         }
-
+        return null
     }
 
 }

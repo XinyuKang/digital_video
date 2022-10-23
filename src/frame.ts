@@ -18,4 +18,12 @@ export class Frame{
             return ret;
         }
     }
+
+    select(id: string) : TNode | null {
+        for (let p of this.players) {
+            let subret = p.select(id)
+            if (subret) return subret
+        }
+        return null
+    }
 }

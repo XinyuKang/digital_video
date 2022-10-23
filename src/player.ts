@@ -43,12 +43,14 @@ export class TNode {
         this.children.push(child);
     }
 
-    select(id: string) {
-        // if (this.id===id) return this
-        // if (!this.children) return null
-        // for (let c of this.children) {
-        //     if (c.select(id)) return 
-        // }
+    select(id: string) : TNode | null {
+        if (this.id===id) return this
+        if (!this.children) return null
+        for (let c of this.children) {
+            let subret = c.select(id)
+            if (subret) return subret
+        }
+        return null
     }
 
     treeTraversal(root: TNode, type: string) {
