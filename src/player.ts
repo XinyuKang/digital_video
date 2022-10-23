@@ -42,6 +42,27 @@ export class TNode {
         }
         this.children.push(child);
     }
+
+    select(id: string) {
+        // if (this.id===id) return this
+        // if (!this.children) return null
+        // for (let c of this.children) {
+        //     if (c.select(id)) return 
+        // }
+    }
+
+    treeTraversal(root: TNode, type: string) {
+        let ret : Array<TNode>  = new Array<TNode>();
+        if (root) {
+            if (root.name === type) ret.push(root);
+            if (root.children) {
+                for (let i=0; i<root.children.length; i++) {
+                    ret.concat(this.treeTraversal(root.children[i], type))
+                }
+            }
+        }
+        return ret
+    }
 }
 
 // TODO: extend and implement interface  https://www.typescripttutorial.net/typescript-tutorial/typescript-extend-interface/
@@ -74,16 +95,5 @@ export class Player extends TNode{
         return ret
     }
 
-    treeTraversal(root: TNode, type: string) {
-        let ret : Array<TNode>  = new Array<TNode>();
-        if (root) {
-            if (root.name === type) ret.push(root);
-            if (root.children) {
-                for (let i=0; i<root.children.length; i++) {
-                    ret.concat(this.treeTraversal(root.children[i], type))
-                }
-            }
-        }
-        return ret
-    }
+    
 }

@@ -8,20 +8,14 @@ export class Frame{
     }
      
   
-    selectAll(name: string) {
-        if (name=="player") return this.players;
+    selectAll(type: string):  Array<TNode> {
+        if (type=="player") return this.players;
         else {
             let ret = new Array<TNode>();
             for (let p of this.players) {
-                ret = ret.concat(p.selectAll(name))   // call internal selectAll in Player
+                ret = ret.concat(p.selectAll(type))   // call internal selectAll in Player
             }
+            return ret;
         }
-        // if (name=="circle") {
-        //     for (let p in this.players) {
-
-        //     }
-        // }
     }
-
-    
 }
