@@ -1,5 +1,4 @@
-import {Player} from "./player";
-import {Shape} from "./shape";
+import {Player, TNode} from "./player";
 
 export class Frame{
     players: Array<Player>;
@@ -12,7 +11,7 @@ export class Frame{
     selectAll(name: string) {
         if (name=="player") return this.players;
         else {
-            let ret = new Array<Shape>();
+            let ret = new Array<TNode>();
             for (let p of this.players) {
                 ret = ret.concat(p.selectAll(name))   // call internal selectAll in Player
             }

@@ -1,16 +1,47 @@
 import {v4 as uuidv4} from 'uuid';
-import {Shape} from "./shape";
+import { Circle, Rect } from './shape';
+import { Text } from './text';
 
 
-export interface TNode {
-    children: TNode[] | null
-    name: string
-    // treeTraversal(type: string): Array<TNode>
-    // attr: TODO: add possile attributes
-}
+// export interface TNode {
+//     children: TNode[] | null
+//     name: string
+//     id: string | null
+//     attr(attr: string, val: string): void
+//     // treeTraversal(type: string): Array<TNode>
+//     // attr: TODO: add possile attributes
+// }
 
-interface PlayerInterface extends TNode {
-    playerID: string | null
+export class TNode {
+
+    children: TNode[] | null;
+    id: string;
+    name: string | null;
+
+    constructor(id?: string){
+        this.name = null;
+        this.children = null;
+        if (!id) this.id = uuidv4();
+        else this.id = id;
+    }
+
+    attr(attr: string, val: string) {
+        if (attr==="id") this.id = val;
+    }
+
+    append(name: string) {
+        // player object cannot add "player" itself
+        if (name == "player") throw new Error("Cannot append 'player' to ")
+        let child: TNode;
+        if (name=="circle") child = new Circle()
+        else if (name=="rect") child = new Rect()
+        else if (name=="text") child = new Text()
+        else throw new Error("Can't append and object of type " + name)
+        if (!this.children) {
+            this.children = new Array<TNode>();
+        }
+        this.children.push(child);
+    }
 }
 
 // TODO: extend and implement interface  https://www.typescripttutorial.net/typescript-tutorial/typescript-extend-interface/
@@ -22,22 +53,12 @@ interface PlayerInterface extends TNode {
 // }
 
 
-export class Player implements PlayerInterface{
+export class Player extends TNode{
     // player: Tree;
-    name: string = "player"
-    children: null|TNode[] = null;
-    playerID: string|null = null;
 
     constructor(id?: string){
-        if (!id) this.playerID = uuidv4()   // TODO check if not passing an argument causes undefined
-        else this.playerID = id
-    }
-
-    addChild(child: TNode) {
-        if (!this.children) {
-            this.children = new Array<TNode>();
-        }
-        this.children.push(child);
+        super(id)
+        this.name = "player"
     }
 
     selectAll(type: string): Array<TNode> {

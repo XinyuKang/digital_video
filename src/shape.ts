@@ -1,68 +1,85 @@
+// this script implements all kinds of shapes that might be  appended
 
 import {TNode} from "./player";
-interface CircleInterface extends TNode {
-    cx: number
-    cy: number
-    r: number
-}
 
-export class Shape {
-    // this class implements all kinds of shapes that might be added to the video
-    // circle, rect, square etc.
-    color: string;
+// interface CircleInterface extends TNode {
+//     cx: number
+//     cy: number
+//     r: number
+//     fill: string
+//     stroke: string
+// }
 
-    constructor() {
-        this.color = "black";
-    }
+// interface RectInterface extends TNode {
+//     x: number
+//     y: number
+//     width: number
+//     height: number
+//     fill: string
+//     stroke: string
+// }
 
-    setAttr(attr: string, style: string) {
-        if (attr==="color") {
-            this.color = style;
-        }
-    }
-}
-
-export class Circle implements CircleInterface {
+export class Circle extends TNode {
     
-    name = "circle";
     cx = 0;
     cy = 0;
     r = 1;
-    children = null;
+    fill = "black"
+    stroke = "black"
 
-    constructor() {
-        
+    constructor(id?: string) {
+        super(id)
+        this.name = "circle"
     }
 
-    setAttr(attr: string, style: string) {
+    attr(attr: string, val: string) {
+        super.attr(attr, val)
         if (attr==="cx") {
-            this.cx = +style;
+            this.cx = +val;
         } else if (attr==="cy") {
-            this.cy = +style;
+            this.cy = +val;
         } else if (attr==="r") {
-            this.r = +style;
+            this.r = +val;
+        } else if (attr==="fill") {
+            this.fill = val
+        } else if (attr==="stroke") {
+            this.stroke = val
         } else {
-            throw new Error("no such attribute for circle")
+            throw new Error("No such attribute for circle")
         }
     }
 }
 
-export class Rect {
-    x: number;
-    y: number;
+export class Rect extends TNode{
 
-    constructor() {
-        this.x = 0;
-        this.y = 0;
+    x = 0
+    y = 0
+    width = 0
+    height = 0
+    fill = "black"
+    stroke = "black"
+
+    constructor(id?: string) {
+        super(id)
+        this.name = "rect"
     }
 
-    setAttr(attr: string, style: string){
+    attr(attr: string, val: string){
+        super.attr(attr, val)
         if (attr==="x") {
-            this.x = +style;
+            this.x = +val;
         } else if (attr==="y") {
-            this.y = +style;
+            this.y = +val;
+        } else if (attr==="width") {
+            this.width = +val;
+        } else if (attr==="height") {
+            this.height = +val;
+        } else if (attr==="fill") {
+            this.fill = val;
+        } else if (attr==="stroke") {
+            this.stroke = val;
         } else {
-            throw new Error("no such attribute for rectangle")
+            throw new Error("No such attribute for rectangle")
         }
     }
 }

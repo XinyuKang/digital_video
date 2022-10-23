@@ -1,9 +1,9 @@
-import {Shape} from "./shape";
 import {Frame} from "./frame"
+import {Player, TNode} from "./player";
 
 export class Video {
    
-    groups: Array<Shape>;
+    groups: Array<TNode>;
     // frames: Tree[]= []
     frames: Array<Frame>;
     
@@ -20,7 +20,7 @@ export class Video {
         return new Array<Frame>;
     }
 
-    selectAll(element: Shape) {
+    selectAll(element: TNode) {
         // select all elements in the video
         // document.querySelectorAll()
 
@@ -31,7 +31,7 @@ export class Video {
         // document.querySelector()
     }
 
-    append(element: Shape) {    // can add more element types
+    append(element: TNode) {    // can add more element types
         // append the specified element to the video
         this.groups.push(element);
         return this;
@@ -39,7 +39,7 @@ export class Video {
 
     attr(attr: string, style: string) {
         // set the attribute of the appended element
-        this.groups.at(-1)?.setAttr(attr, style);
+        this.groups.at(-1)?.attr(attr, style);
         
     }
 }
